@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "userscript-vault",
+  "description": "외부 유출 없는 개인용 사용자 스크립트 관리자",
+  "version": "0.1.0",
+  "minimum_chrome_version": "135",
+  "permissions": ["userScripts", "storage", "unlimitedStorage", "activeTab"],
+  "optional_host_permissions": ["<all_urls>"],
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "action": {
+    "default_popup": "src/popup/popup.html",
+    "default_title": "userscript-vault",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png"
+    }
+  },
+  "options_page": "src/options/options.html"
+}

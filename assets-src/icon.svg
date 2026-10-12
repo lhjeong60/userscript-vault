@@ -1,0 +1,21 @@
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2d6cdf"/>
+      <stop offset="1" stop-color="#1a44a0"/>
+    </linearGradient>
+  </defs>
+  <!-- 라운드 배경 -->
+  <rect x="4" y="4" width="120" height="120" rx="26" fill="url(#bg)"/>
+  <!-- 자물쇠 고리 (shackle) -->
+  <path d="M44 56 V44 a20 20 0 0 1 40 0 V56"
+        fill="none" stroke="#dce7fb" stroke-width="9" stroke-linecap="round"/>
+  <!-- 자물쇠 몸체 -->
+  <rect x="30" y="54" width="68" height="54" rx="12" fill="#f4f7ff"/>
+  <!-- 코드 브래킷 </> : vault 안에 스크립트 -->
+  <g stroke="#1a44a0" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <polyline points="52,70 44,81 52,92"/>
+    <polyline points="76,70 84,81 76,92"/>
+    <line x1="68" y1="67" x2="60" y2="95"/>
+  </g>
+</svg>

@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <title>userscript-vault</title>
+    <link rel="stylesheet" href="./popup.css" />
+  </head>
+  <body>
+    <header class="head">
+      <span id="host" class="host">…</span>
+      <button type="button" id="open-options" class="btn btn-small" title="관리 페이지 열기">관리</button>
+    </header>
+    <div id="banner" class="banner" hidden></div>
+    <div id="notice" class="notice" role="status" hidden></div>
+    <main id="content" class="content"></main>
+    <script type="module" src="./popup.ts"></script>
+  </body>
+</html>

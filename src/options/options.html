@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>userscript-vault</title>
+    <link rel="stylesheet" href="./options.css" />
+  </head>
+  <body>
+    <header id="banners" class="banners" aria-live="polite"></header>
+
+    <main id="layout" class="layout" data-stage="empty">
+      <!-- 도메인 영역: 추가 · 편집 · 삭제 -->
+      <section class="pane pane-domains" aria-labelledby="domains-heading">
+        <header class="pane-head">
+          <h2 id="domains-heading" class="pane-title">도메인</h2>
+          <button type="button" id="add-domain-btn" class="btn btn-small">+ 추가</button>
+        </header>
+
+        <div id="onboarding" class="onboarding" hidden>
+          <p class="onboarding-title">스크립트를 실행할 사이트를 먼저 등록하세요</p>
+          <p class="onboarding-desc">도메인 하나에 스크립트 여러 개를 둘 수 있습니다. 등록한 도메인 외에는 확장이 어떤 페이지에도 접근하지 않습니다.</p>
+          <button type="button" id="onboarding-add-btn" class="btn btn-primary">도메인 추가</button>
+        </div>
+
+        <ul id="domain-list" class="list" aria-label="도메인 목록"></ul>
+        <p id="domains-hint" class="pane-hint" hidden>도메인을 선택하면 스크립트 목록이 열립니다.</p>
+
+        <footer class="pane-foot">
+          <button type="button" id="export-btn" class="btn btn-small">내보내기</button>
+          <label class="btn btn-small">가져오기<input type="file" id="import-input" accept=".zip,application/zip" hidden /></label>
+        </footer>
+      </section>
+
+      <!-- 스크립트 영역: 새로 만들기 · 삭제 · 선택 -->
+      <section class="pane pane-scripts" aria-labelledby="scripts-heading" hidden>
+        <header class="pane-head">
+          <h2 id="scripts-heading" class="pane-title pane-title-mono">스크립트</h2>
+          <button type="button" id="add-script-btn" class="btn btn-small">+ 새 스크립트</button>
+        </header>
+        <ul id="script-list" class="list" aria-label="스크립트 목록"></ul>
+        <p class="pane-hint">스크립트는 자동 실행되지 않습니다. 해당 도메인 페이지를 연 뒤 툴바 팝업에서 "실행"을 눌러 그때만 주입합니다.</p>
+      </section>
+
+      <!-- 에디터 영역: 선택한 스크립트 조회 · 수정 · 저장 -->
+      <section class="pane pane-editor" aria-labelledby="editor-heading" hidden>
+        <h2 id="editor-heading" class="visually-hidden">에디터</h2>
+        <header class="pane-head editor-head">
+          <input id="script-name" class="field field-name" placeholder="스크립트 이름" aria-label="스크립트 이름" />
+          <label class="field-label">world
+            <select id="world" class="field" aria-label="실행 world">
+              <option value="USER_SCRIPT" selected>USER_SCRIPT</option>
+              <option value="MAIN">MAIN</option>
+            </select>
+          </label>
+          <button type="button" id="save-btn" class="btn btn-primary" disabled>저장</button>
+        </header>
+        <div id="editor" class="editor"></div>
+        <footer id="status" class="status" aria-live="polite"></footer>
+      </section>
+    </main>
+
+    <!-- 도메인 추가/편집 -->
+    <dialog id="domain-dialog" class="dialog">
+      <form id="domain-form" class="dialog-form" autocomplete="off">
+        <h3 id="domain-dialog-title" class="dialog-title">도메인 추가</h3>
+        <label class="dialog-field">호스트
+          <input id="domain-host" class="field" placeholder="example.com" required />
+        </label>
+        <label class="dialog-check"><input type="checkbox" id="domain-subdomains" /> 서브도메인 포함 (<code id="domain-subdomains-preview">*.example.com</code>)</label>
+        <p id="domain-error" class="inline-error" role="alert" hidden></p>
+        <div class="dialog-actions">
+          <button type="button" id="domain-delete-btn" class="btn btn-danger" hidden>도메인 삭제</button>
+          <span class="dialog-spacer"></span>
+          <button type="button" id="domain-cancel-btn" class="btn">취소</button>
+          <button type="submit" id="domain-submit-btn" class="btn btn-primary">추가</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="confirm-dialog" class="dialog">
+      <p id="confirm-text" class="dialog-text"></p>
+      <form method="dialog" class="dialog-actions">
+        <span class="dialog-spacer"></span>
+        <button value="cancel" class="btn">취소</button>
+        <button value="ok" id="confirm-ok" class="btn btn-primary">확인</button>
+      </form>
+    </dialog>
+
+    <dialog id="conflict-dialog" class="dialog">
+      <p class="dialog-text">같은 이름의 스크립트가 이미 있을 때 어떻게 할까요?</p>
+      <form method="dialog" class="dialog-actions">
+        <span class="dialog-spacer"></span>
+        <button value="cancel" class="btn">취소</button>
+        <button value="skip" class="btn">건너뛰기</button>
+        <button value="overwrite" class="btn btn-primary">덮어쓰기</button>
+      </form>
+    </dialog>
+
+    <script type="module" src="./options.ts"></script>
+  </body>
+</html>

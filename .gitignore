@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.spike/
+dist-e2e/
+test-results/
+*.zip
+.shot/
